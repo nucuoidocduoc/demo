@@ -43,8 +43,13 @@
                         <ColumnDefinition />
                         <ColumnDefinition Width="0.1*" />
                     </Grid.ColumnDefinitions>
-                    <StackPanel x:Name="navControl" Orientation="Horizontal">
-                        <Button Content="File" />
+                    <StackPanel x:Name="navControl" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="Excel File" Style="{StaticResource MenuBtn}" VerticalAlignment="Center"
+                                Foreground="White" Padding="5" />
+                        <Button Content="Video File" Style="{StaticResource MenuBtn}" VerticalAlignment="Center"
+                                Foreground="White" Padding="5" Margin="10 0 0 0" />
+                        <Button Content="Edit Excel File" Style="{StaticResource MenuBtn}" VerticalAlignment="Center"
+                                Foreground="White" Padding="5" Margin="10 0 0 0" />
                     </StackPanel>
                     <Grid x:Name="connectControl" Grid.Column="1">
                         <Grid.RowDefinitions>
@@ -55,23 +60,25 @@
                             <ColumnDefinition Width="0.2*" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Button Command="{Binding ConnectCommand}">
-                            Connect
+                        <Button Command="{Binding ConnectCommand}" Style="{StaticResource StandardBtn}"
+                                Foreground="White" Margin="5 4 5 4">
+                            Card Connect
                         </Button>
-                        <Button Grid.Row="1">
-                            Connect
+                        <Button Grid.Row="1" Style="{StaticResource StandardBtn}" Foreground="White" Margin="5 4 5 4">
+                            Ring Connect
                         </Button>
                         <Path Style="{StaticResource LedPath}" Grid.Column="1" />
                         <Path Style="{StaticResource LedPath}" Grid.Row="1" Grid.Column="1" />
                     </Grid>
-                    <Button Grid.Column="2" Command="{Binding CloseAppCommand}" CommandParameter="{Binding ElementName=AppWindow}" Style="{StaticResource CloseAppStyle}" />
+                    <Button Grid.Column="2" Command="{Binding CloseAppCommand}"
+                            CommandParameter="{Binding ElementName=AppWindow}" Style="{StaticResource CloseAppStyle}" />
                 </Grid>
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="473*" />
                         <RowDefinition Height="174*" />
                     </Grid.RowDefinitions>
-                    <Border BorderThickness="0 0 0 1" BorderBrush="#6E6D70" Padding="0 10 0 10">
+                    <Border BorderThickness="0 0 0 1" BorderBrush="#6E6D70">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="433*" />
@@ -82,19 +89,89 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Border BorderThickness="0 1 0.5 1" BorderBrush="#6E6D70">
-                                <customControl:MediaPlayer LoadedBehavior="Manual"  UnloadedBehavior="Stop" IsPlay="{Binding IsPlay}" IsStop="{Binding IsStop}" Source="Assets/test.mp4" />
+                                <customControl:MediaPlayer LoadedBehavior="Manual" UnloadedBehavior="Stop"
+                                                           IsPlay="{Binding ElementName=play, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}"
+                                                           IsStop="{Binding IsStop}" Source="Assets/test.mp4" />
                             </Border>
                             <Border Grid.Column="1" BorderThickness="0.5 1 1 0" BorderBrush="#6E6D70">
                                 <ListView />
                             </Border>
-                            <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
-                                <Button Content="Play" Command="{Binding PlayCommand}" />
-                                <Button Content="Stop" Command="{Binding StopCommand}" />
+                            <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center"
+                                        Margin="0 5 0 5">
+                                <Button Content="backward" Style="{StaticResource MediaBtn}" Foreground="White"
+                                        Padding="5" />
+                                <CheckBox x:Name="play" Content="play" Style="{StaticResource MediaRadioBtnPlay}"
+                                          Foreground="White" Padding="5" Margin="15 0 0 0" />
+                                <Button Content="stop" Command="{Binding StopCommand}"
+                                        Style="{StaticResource MediaBtn}" Foreground="White" Padding="5"
+                                        Margin="15 0 0 0" />
+                                <Button Content="forward" Style="{StaticResource MediaBtn}" Foreground="White"
+                                        Padding="5" Margin="15 0 0 0" />
                             </StackPanel>
-                            <TextBlock Text="00:00:1234" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24" />
+                            <TextBlock Text="00:00:1234" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center"
+                                       VerticalAlignment="Center" Foreground="White" FontSize="24" />
                         </Grid>
                     </Border>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="956*" />
+                            <ColumnDefinition Width="413*" />
+                        </Grid.ColumnDefinitions>
+                        <Border Margin="10 10 0 10" Padding="10 5 10 5" CornerRadius="5" BorderBrush="#555353"
+                                BorderThickness="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <ComboBox Style="{StaticResource ComboBoxFlatStyle}" Margin="5" SelectedIndex="0">
+                                    <ComboBoxItem Style="{StaticResource ItemComboBoxFlat}" Content="FLAME CONTROLLER" />
+                                    <ComboBoxItem Style="{StaticResource ItemComboBoxFlat}" Content="CO2 CONTROLLER" />
+                                    <ComboBoxItem Style="{StaticResource ItemComboBoxFlat}"
+                                                  Content="SPAKULAR CONTROLLER" />
+                                </ComboBox>
+                                <TextBox Grid.Row="1" Style="{StaticResource StandardTextbox}" />
+                                <TextBlock Style="{StaticResource StandardTextBlock}" Grid.Row="2" Text="Số máy" />
+
+                                <ComboBox Grid.Column="1" Style="{StaticResource ComboBoxFlatStyle}" Margin="5"
+                                          SelectedIndex="0">
+                                    <ComboBoxItem Style="{StaticResource ItemComboBoxFlat}" Content="FIRE ALL" />
+                                    <ComboBoxItem Style="{StaticResource ItemComboBoxFlat}" Content="TRÁI - PHẢI" />
+                                    <ComboBoxItem Style="{StaticResource ItemComboBoxFlat}" Content="PHẢI - TRÁI" />
+                                    <ComboBoxItem Style="{StaticResource ItemComboBoxFlat}" Content="TỪ GIỮA" />
+                                    <ComboBoxItem Style="{StaticResource ItemComboBoxFlat}" Content="TỪ NGOÀI" />
+                                </ComboBox>
+                                <TextBox Style="{StaticResource StandardTextbox}" Grid.Row="1" Grid.Column="1" />
+                                <TextBlock Style="{StaticResource StandardTextBlock}" Grid.Row="2" Grid.Column="1"
+                                           Text="ID Module" />
+
+                                <TextBox Style="{StaticResource StandardTextbox}" Grid.Row="1" Grid.Column="2" />
+                                <TextBlock Style="{StaticResource StandardTextBlock}" Grid.Row="2" Grid.Column="2"
+                                           Text="Thời gian giữ" />
+
+                                <TextBox Style="{StaticResource StandardTextbox}" Grid.Row="1" Grid.Column="3" />
+                                <TextBlock Style="{StaticResource StandardTextBlock}" Grid.Row="2" Grid.Column="3"
+                                           Text="Duration" />
+                            </Grid>
+                        </Border>
+                        <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                              Style="{StaticResource NameBase}">
+                            <TextBlock Style="{StaticResource TextOne}" />
+                            <Border Style="{StaticResource TextBorder}">
+                                <TextBlock Style="{StaticResource TextTwo}" />
+                            </Border>
+                        </Grid>
+                    </Grid>
                 </Grid>
+
             </Grid>
         </Border>
 
@@ -118,13 +195,6 @@
 
         <!--// Channel Name //-->
 
-        <Grid Style="{StaticResource NameBase}">
-
-            <TextBlock Style="{StaticResource TextOne}" />
-            <Border Style="{StaticResource TextBorder}">
-                <TextBlock Style="{StaticResource TextTwo}" />
-            </Border>
-        </Grid>
 
         <!--// Close App Button //-->
     </Grid>

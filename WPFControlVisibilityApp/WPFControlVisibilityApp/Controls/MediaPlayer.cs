@@ -17,8 +17,8 @@ namespace WPFControlVisibilityApp.Controls
 
         public bool IsPlay
         {
-            get { return (bool)GetValue(IsPlayProperty); }
-            set { SetValue(IsPlayProperty, value); }
+            get => (bool)GetValue(IsPlayProperty);
+            set => SetValue(IsPlayProperty, value);
         }
 
         public bool IsStop
